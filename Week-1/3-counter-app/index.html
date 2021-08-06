@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"/>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="row mt-5">
+            <div class="col-4 card offset-4 p-2">
+                <h3 class="text-center">{{counter}}</h3>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button @click="counter++" class="btn btn-sm btn-primary me-2">+</button>
+                    <button @click="counter--" class="btn btn-sm btn-danger">-</button>
+                    <!-- <button @click="inc" class="btn btn-sm btn-primary me-2">+</button>
+                    <button @click="dec" class="btn btn-sm btn-danger">-</button> -->
+                </div>
+                <!-- <div class="alert alert-warning mt-2">{{getCounterResult()}}</div>  //METHOD  -->
+                <div class="alert alert-warning mt-2">{{getCounterResult}}</div>  //COMPUTED
+
+            </div>
+
+            <div class="col-4 card offset-4 p-2">
+                <h3 class="text-center">{{counter2}}</h3>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button @click="counter2++" class="btn btn-sm btn-primary me-2">+</button>
+                    <button @click="counter2--" class="btn btn-sm btn-danger">-</button>
+                    <!-- <button @click="inc" class="btn btn-sm btn-primary me-2">+</button>
+                    <button @click="dec" class="btn btn-sm btn-danger">-</button> -->
+                </div>
+                <div class="alert alert-warning mt-2">{{getCounter2Result}}</div>     
+            </div>
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

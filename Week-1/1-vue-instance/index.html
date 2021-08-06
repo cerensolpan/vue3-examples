@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <h1>{{title}}</h1>
+        <p>{{content}}</p>
+        <a v-bind:target="eduflow.target" v-bind:href="eduflow.url" :alt="eduflow.alt" :kablosuzkedi="owner">{{eduflow.title}}</a>
+        <br>
+        <br>
+        <button v-on:click="changeTitle('Bu 1.buton')">Title Değiştir</button>
+        <button v-on:click="changeTitle('Bu 2.buton')">Title Değiştir2</button>
+
+        <div class="box" @mousemove="updateCoords('mouseeeMovee', $event)" @click="changeTitle('Box üzerinden gelen')"></div>
+        <span>{{coords.x}},{{coords.y}}</span>
+    </div> 
+    <script src="app.js"></script>
+</body>
+</html>
