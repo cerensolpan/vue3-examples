@@ -12,7 +12,10 @@
     <div id="app" class="container">
         <div class="row mt-5">
             <div class="col-4 offset-4 p-2 card">
-                <pre>{{itemList}}</pre>
+                <input type="text" v-model="search"/>
+                <button class="mt-3" @click="searchList">Filter</button>
+                <pre class="mt-3">{{ itemList }}</pre>
+                <pre class="mt-3">{{ filteredList }}</pre>
             </div>
         </div>
     </div>
