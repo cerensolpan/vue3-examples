@@ -4,13 +4,15 @@
   <div>
     <input type="text" placeholder="ne alacaksın?" @keydown.enter="onSave">
   </div>
-  <ul>
+  <ul v-if="itemsList.length > 0">
     <li v-for="item in itemsList" :key="item.id" class="d-flex justify-content-between align-items-center">
-      <span>{{item.title}}</span>
-      <button class="sm red">Sil</button>
+      <span>{{ item.title }}</span>
+      <button @click="onDelete(item)" class="sm red">Sil</button>
     </li>
-  
   </ul>
+  <div v-else class="bg-blue text-white">
+    Herhangi bir ürün yoktur..
+  </div>
 
   <small class="text-blue">{{itemCount}} adet alınacak ürün vardır.</small>
 </div>
@@ -20,7 +22,9 @@
 import axios from "axios";
 export default {
 data(){
-  return{};
+  return{
+    itemsList: []
+  };
 },
 mounted(){
   axios.get("http://localhost:3000/items").then(items_response =>{
@@ -48,6 +52,7 @@ onSave(e){
 onDelete(){
   axios.delete(`http://localhost:3000/items/${item.id}`).then(delete_response=>{
     console.log(delete_response);
+    this.itemsList = this.itemsList.filter(i => i.id !== item.id);
   })
 }
 },
