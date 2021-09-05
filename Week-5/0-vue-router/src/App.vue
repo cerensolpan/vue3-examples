@@ -1,8 +1,11 @@
 <template>
   <div class="container">
-    <router-link class="nav-link" active-class="active" to="/">Anasayfa</router-link>
-    <router-link class="nav-link" active-class="active" to="/hakkimda">Hakkımda</router-link>
-    <router-view></router-view>
+    <div class="mb-2">
+      <router-link class="nav-link" active-class="active" to="/">Anasayfa</router-link>
+      <router-link class="nav-link" active-class="active" to="/hakkimda">Hakkımda</router-link>
+      <router-link class="nav-link" active-class="active" to="/detay/123">Detay</router-link>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
