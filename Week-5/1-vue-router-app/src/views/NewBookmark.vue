@@ -37,6 +37,7 @@ export default {
             this.$appAxios.post("/bookmarks", this.userData).then(save_response => {
                 console.log("save_response",save_response);
                 this.resetData();
+                this.$router.push("/")
             })
         },
         resetData(){
