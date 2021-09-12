@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 export const appAxios = axios.create({
-    baseUrl : "http://localhost:3000"
+    baseURL : "http://localhost:3000"
 });

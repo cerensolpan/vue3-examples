@@ -27,14 +27,14 @@ export default {
   methods:{
     onSave(){
       // const password = this.userData.password
-      const key = "social123";
-      const password = CryptoJs.AES.encrypt(this.userData.password,key).toString();
+      const password = CryptoJs.HmacSHA1(this.userData.password,this.$store.getters._saltKey).toString();
       // const cryptedPassword = CryptoJs.AES.encrypt(password,key).toString();
       // console.log("cryptedPassword :>>", cryptedPassword);
 
       // this.$appAxios.post("/users", {... this.userData, password: cryptedPassword})
       this.$appAxios.post("/users", {...this.userData, password}).then(registered_user_response =>{
         console.log("registered_user_response :>>", registered_user_response);
+        this.$router.push({name:"HomePage"});
       })
       //console.log(this.userData);
       // const decryptedPassword = CryptoJs.AES.decrypt(cryptedPassword,key).toString(CryptoJs.enc.Utf8);
