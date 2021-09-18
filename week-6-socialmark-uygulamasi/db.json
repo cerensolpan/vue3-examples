@@ -13,6 +13,80 @@
       "id": 2
     }
   ],
-  "bookmarks": [],
-  "categories": []
+  "bookmarks": [
+    {
+      "title": "Vue Dokümantasyon",
+      "url": "https://vuejs.org",
+      "categoryId": 1,
+      "description": "Güncel framework..",
+      "userId": 2,
+      "created_at": "2021-09-14T20:33:37.672Z",
+      "id": 1
+    },
+    {
+      "title": "Müzikler",
+      "url": "https:/....",
+      "categoryId": 6,
+      "description": "Yeni Müzik Listesi",
+      "userId": 2,
+      "created_at": "2021-09-18T21:16:28.888Z",
+      "id": 2
+    },
+    {
+      "title": "Nuxt.js",
+      "url": "https://nuxtjs.org/",
+      "category_id": null,
+      "description": "Vue framework",
+      "categoryId": 1,
+      "userId": 1,
+      "created_at": "2021-09-18T22:12:03.673Z",
+      "id": 3
+    },
+    {
+      "title": "React Doküman",
+      "url": "https://tr.reactjs.org/",
+      "category_id": null,
+      "description": "Bu bir react dokümanıdır.",
+      "categoryId": 2,
+      "userId": 1,
+      "created_at": "2021-09-18T22:38:28.963Z",
+      "id": 4
+    },
+    {
+      "title": "Node js",
+      "url": "https://nodejs.org/en/",
+      "category_id": null,
+      "description": "Nodejs hakkında bilgi almak için kullanabileceginiz bir kaynaktır.",
+      "categoryId": 3,
+      "userId": 1,
+      "created_at": "2021-09-18T22:39:32.635Z",
+      "id": 5
+    }
+  ],
+  "categories": [
+    {
+      "name": "Vue.js",
+      "id": 1
+    },
+    {
+      "name": "React.js",
+      "id": 2
+    },
+    {
+      "name": "Backend",
+      "id": 3
+    },
+    {
+      "name": "Frontend",
+      "id": 4
+    },
+    {
+      "name": "Cloud",
+      "id": 5
+    },
+    {
+      "name": "Sosyal Yaşam",
+      "id": 6
+    }
+  ]
 }
