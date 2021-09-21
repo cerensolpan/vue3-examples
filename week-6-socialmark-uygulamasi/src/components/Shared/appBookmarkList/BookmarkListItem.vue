@@ -9,7 +9,9 @@
                 >{{item.title || "-"}}</a
               >
               <div class="flex items-center justify-center mt-2 gap-x-1">
-                <button @click="likeItem" class="like-btn group">
+                <button @click="likeItem" class="like-btn group" :class="{
+                'bookmark-item-active' : alreadyLiked
+                }">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="fill-current group-hover:text-white"
@@ -23,7 +25,9 @@
                     />
                   </svg>
                 </button>
-                <button class="bookmark-btn group bookmark-item-active">
+                <button @click="bookmarkItem" class="bookmark-btn group" :class="{
+                 'bookmark-item-active' : alreadyBookmark
+                  }">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="fill-current group-hover:text-white"
@@ -80,11 +84,31 @@ export default {
   },
   methods: {
     likeItem(){
-
-      this.$appAxios.patch(`/users/${this._getCurrentUser.id}`, {likes: [this.item.id]}).then(like_response => {
+      let likes = [...this._userLikes]
+      if(!this.alreadyLiked){
+        likes = [...likes, this.item.id];
+      } else {
+        likes = likes.filter(l=> l !== this.item.id)
+      }
+      this.$appAxios.patch(`/users/${this._getCurrentUser.id}`, {likes}).then(like_response => {
          console.log(like_response);
+         this.$store.commit("setLikes", likes)
       }
      
+      )
+    },
+
+    bookmarkItem(){
+      let bookmarks = [...this._userBookmarks]
+      if(!this.alreadyBookmark){
+        bookmarks = [...bookmarks, this.item.id];
+      } else {
+        bookmarks = bookmarks.filter(b=> b !== this.item.id)
+      }
+      this.$appAxios.patch(`/users/${this._getCurrentUser.id}`, {bookmarks}).then(bookmark_response => {
+         console.log(bookmark_response);
+         this.$store.commit("setBookmarks", bookmarks)
+      }
       )
     }
   },
@@ -94,6 +118,12 @@ export default {
     },
     userName(){
       return this.item?.user?.fullname || "-"
+    },
+    alreadyLiked(){
+      return this._userLikes?.indexOf(this.item.id)>-1
+    },
+    alreadyBookmark(){
+      return this._userBookmarks?.indexOf(this.item.id)>-1
     },
     ...mapGetters(["_getCurrentUser","_userLikes","_userBookmarks"])
   }

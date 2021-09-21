@@ -5,7 +5,10 @@
       "fullname": "Ceren Türe",
       "password": "18574d32b43847e88637afc2219ba88de869a4f4",
       "id": 1,
-      "likes": [],
+      "likes": [
+        3,
+        2
+      ],
       "bookmarks": []
     },
     {
@@ -13,8 +16,13 @@
       "fullname": "Baris Ture",
       "password": "18574d32b43847e88637afc2219ba88de869a4f4",
       "id": 2,
-      "likes": [],
-      "bookmarks": []
+      "likes": [
+        3
+      ],
+      "bookmarks": [
+        3,
+        4
+      ]
     }
   ],
   "bookmarks": [

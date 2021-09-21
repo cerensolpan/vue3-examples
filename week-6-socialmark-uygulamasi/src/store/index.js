@@ -13,6 +13,12 @@ export default createStore({
         },
         logoutUser(state){
             state.user = null;
+        },
+        setLikes(state,bookmarkIds){
+            state.user.likes=bookmarkIds
+        },
+        setBookmarks(state,bookmarkIds){
+            state.user.bookmarks=bookmarkIds
         }
     },
     getters:{
