@@ -80,6 +80,65 @@
       "userId": 1,
       "created_at": "2021-09-18T22:39:32.635Z",
       "id": 5
+    },
+    {
+      "title": "Cloud",
+      "url": "http://",
+      "category_id": null,
+      "description": "Cloud...",
+      "categoryId": 5,
+      "userId": 2,
+      "created_at": "2021-09-22T21:26:24.420Z",
+      "id": 6
+    },
+    {
+      "title": "Vue,React",
+      "url": "http://frontend",
+      "category_id": null,
+      "description": "Frontend",
+      "categoryId": 4,
+      "userId": 2,
+      "created_at": "2021-09-22T21:28:21.197Z",
+      "id": 7
+    },
+    {
+      "title": "Sosyal medya",
+      "url": "-",
+      "categoryId": 6,
+      "description": "Sosyal Yaşamın parçası",
+      "userId": 2,
+      "created_at": "2021-09-22T21:34:43.364Z",
+      "id": 8
+    },
+    {
+      "title": "İleri React",
+      "url": "http",
+      "category_id": null,
+      "description": "İleri React derslerini içerir.",
+      "categoryId": 2,
+      "userId": 2,
+      "created_at": "2021-09-22T21:39:30.132Z",
+      "id": 9
+    },
+    {
+      "title": "Deneme",
+      "url": "deneme",
+      "category_id": null,
+      "description": "deneme",
+      "socket": {},
+      "categoryId": 1,
+      "userId": 2,
+      "created_at": "2021-09-22T21:40:56.697Z",
+      "id": 10
+    },
+    {
+      "title": "Vue3",
+      "url": "http",
+      "categoryId": 1,
+      "description": "vue3",
+      "userId": 2,
+      "created_at": "2021-09-22T21:44:57.874Z",
+      "id": 11
     }
   ],
   "categories": [
