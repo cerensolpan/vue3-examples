@@ -4,25 +4,32 @@
       "username": "cture",
       "fullname": "Ceren Türe",
       "password": "18574d32b43847e88637afc2219ba88de869a4f4",
-      "id": 1,
-      "likes": [
-        3,
-        2
-      ],
-      "bookmarks": []
+      "id": 1
     },
     {
       "username": "bture",
       "fullname": "Baris Ture",
       "password": "18574d32b43847e88637afc2219ba88de869a4f4",
-      "id": 2,
-      "likes": [
-        3
-      ],
-      "bookmarks": [
-        3,
-        4
-      ]
+      "id": 2
+    }
+  ],
+  "user_likes": [
+    {
+      "userId": 2,
+      "bookmarkId": 1,
+      "id": 1
+    },
+    {
+      "userId": 2,
+      "bookmarkId": 2,
+      "id": 2
+    }
+  ],
+  "user_bookmarks": [
+    {
+      "userId": 2,
+      "bookmarkId": 1,
+      "id": 1
     }
   ],
   "bookmarks": [

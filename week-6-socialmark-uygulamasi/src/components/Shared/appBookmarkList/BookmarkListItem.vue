@@ -26,7 +26,7 @@
                   </svg>
                 </button>
                 <button @click="bookmarkItem" class="bookmark-btn group" :class="{
-                 'bookmark-item-active' : alreadyBookmark
+                 'bookmark-item-active' : alreadyBookmarked
                   }">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +83,25 @@ export default {
     }
   },
   methods: {
-    likeItem(){
+     likeItem() {
+      this.$appAxios({
+        url: this.alreadyLiked ? `/user_likes/${this.likedItem.id}` : "/user_likes",
+        method: this.alreadyLiked ? "DELETE" : "POST",
+        data: {
+          userId: this._getCurrentUser.id,
+          bookmarkId: this.item.id
+        }
+      }).then(user_like_response => {
+        let bookmarks = [...this._userLikes];
+        if (this.alreadyLiked) {
+          bookmarks = bookmarks.filter(b => b.id !== this.likedItem.id);
+        } else {
+          bookmarks = [...bookmarks, user_like_response.data];
+        }
+        this.$store.commit("setLikes", bookmarks);
+      });
+    },
+    _likeItem(){
       let likes = [...this._userLikes]
       if(!this.alreadyLiked){
         likes = [...likes, this.item.id];
@@ -97,10 +115,27 @@ export default {
      
       )
     },
-
-    bookmarkItem(){
+    bookmarkItem() {
+      this.$appAxios({
+        url: this.alreadyBookmarked ? `/user_bookmarks/${this.bookmarkedItem.id}` : "/user_bookmarks",
+        method: this.alreadyBookmarked ? "DELETE" : "POST",
+        data: {
+          userId: this._getCurrentUser.id,
+          bookmarkId: this.item.id
+        }
+      }).then(user_bookmark_response => {
+        let bookmarks = [...this._userBookmarks];
+        if (this.alreadyBookmarked) {
+          bookmarks = bookmarks.filter(b => b.id !== this.bookmarkedItem.id);
+        } else {
+          bookmarks = [...bookmarks, user_bookmark_response.data];
+        }
+        this.$store.commit("setBookmarks", bookmarks);
+      });
+    },
+    _bookmarkItem(){
       let bookmarks = [...this._userBookmarks]
-      if(!this.alreadyBookmark){
+      if(!this.alreadyBookmarked){
         bookmarks = [...bookmarks, this.item.id];
       } else {
         bookmarks = bookmarks.filter(b=> b !== this.item.id)
@@ -119,12 +154,24 @@ export default {
     userName(){
       return this.item?.user?.fullname || "-"
     },
-    alreadyLiked(){
-      return this._userLikes?.indexOf(this.item.id)>-1
+     alreadyLiked() {
+      return Boolean(this.likedItem);
     },
-    alreadyBookmark(){
-      return this._userBookmarks?.indexOf(this.item.id)>-1
+    alreadyBookmarked() {
+      return Boolean(this.bookmarkedItem);
     },
+    bookmarkedItem() {
+      return this._userBookmarks?.find(b => b.bookmarkId === this.item.id);
+    },
+    likedItem() {
+      return this._userLikes?.find(b => b.bookmarkId === this.item.id);
+    },
+    // alreadyLiked(){
+    //   return this._userLikes?.indexOf(this.item.id)>-1
+    // },
+    // alreadyBookmark(){
+    //   return this._userBookmarks?.indexOf(this.item.id)>-1
+    // },
     ...mapGetters(["_getCurrentUser","_userLikes","_userBookmarks"])
   }
 }
