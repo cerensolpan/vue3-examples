@@ -7,5 +7,6 @@
 <script setup>
 import appSidebar from "./components/appSidebar.vue"
 import invoiceContent from "./components/invoiceContent.vue"
+
 </script>
 
