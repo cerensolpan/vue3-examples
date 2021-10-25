@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white flex flex-col gap-x-3 rounded-md shadow-sm">
     <div class="p-3">
-      <a :href="item.url" target="_blank" class="hover:text-black font-bold text-l mb-1 text-gray-600 text-center">{{ item.title || "-" }}</a>
+      <a :href="props.item.url" target="_blank" class="hover:text-black font-bold text-l mb-1 text-gray-600 text-center">{{ props.item.title || "-" }}</a>
       <div class="flex items-center justify-center mt-2 gap-x-1">
         <button
           @click="likeItem"
@@ -36,7 +36,7 @@
               <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17l-.59.59-.58.58V4h16v12zM6 12h2v2H6zm0-3h2v2H6zm0-3h2v2H6zm4 6h5v2h-5zm0-3h8v2h-8zm0-3h8v2h-8z" />
             </svg>
             <p class="details-container">
-              {{ item.description }}
+              {{ props.item.description }}
             </p>
           </button>
         </div>
@@ -49,99 +49,17 @@
     <div class="bg-red-200 p-1 mt-auto text-red-900 text-center text-sm">{{ categoryName }}</div>
   </div>
 </template>
-<script>
-import { mapGetters } from "vuex";
-export default {
-  props: {
-    item: {
-      type: Object,
-      required: true,
-      default: () => {}
-    }
-  },
-  methods: {
-    likeItem() {
-      this.$appAxios({
-        url: this.alreadyLiked ? `/user_likes/${this.likedItem.id}` : "/user_likes",
-        method: this.alreadyLiked ? "DELETE" : "POST",
-        data: {
-          userId: this._getCurrentUser.id,
-          bookmarkId: this.item.id
-        }
-      }).then(user_like_response => {
-        let bookmarks = [...this._userLikes];
-        if (this.alreadyLiked) {
-          bookmarks = bookmarks.filter(b => b.id !== this.likedItem.id);
-        } else {
-          bookmarks = [...bookmarks, user_like_response.data];
-        }
-        this.$store.commit("setLikes", bookmarks);
-      });
-    },
-    _likeItem() {
-      let likes = [...this._userLikes];
-      if (!this.alreadyLiked) {
-        likes = [...likes, this.item.id];
-      } else {
-        likes = likes.filter(l => l !== this.item.id);
+<script setup>
+/* eslint-disable no-unused-vars */
+import {defineProps} from "vue";
+import BookmarkListItem from "@/composables/BookmarkListItem.js"
+  const props= defineProps({
+  item: {
+        type: Object,
+        required: true,
+        default: () => {}
       }
-      this.$appAxios.patch(`/users/${this._getCurrentUser.id}`, { likes }).then(() => {
-        this.$store.commit("setLikes", likes);
-      });
-    },
-    bookmarkItem() {
-      this.$appAxios({
-        url: this.alreadyBookmarked ? `/user_bookmarks/${this.bookmarkedItem.id}` : "/user_bookmarks",
-        method: this.alreadyBookmarked ? "DELETE" : "POST",
-        data: {
-          userId: this._getCurrentUser.id,
-          bookmarkId: this.item.id
-        }
-      }).then(user_bookmark_response => {
-        let bookmarks = [...this._userBookmarks];
-        if (this.alreadyBookmarked) {
-          bookmarks = bookmarks.filter(b => b.id !== this.bookmarkedItem.id);
-        } else {
-          bookmarks = [...bookmarks, user_bookmark_response.data];
-        }
-        this.$store.commit("setBookmarks", bookmarks);
-      });
-    },
-    _bookmarkItem() {
-      let bookmarks = [...this._userBookmarks];
-      if (!this.alreadyBookmarked) {
-        bookmarks = [...bookmarks, this.item.id];
-      } else {
-        bookmarks = bookmarks.filter(b => b !== this.item.id);
-      }
-      this.$appAxios.patch(`/users/${this._getCurrentUser.id}`, { bookmarks }).then(() => {
-        this.$store.commit("setBookmarks", bookmarks);
-      });
-    }
-  },
-  computed: {
-    categoryName() {
-      return this.item?.category?.name || "-";
-    },
-    userName() {
-      return this.item?.user?.fullname || "-";
-    },
-    // _alreadyLiked() {
-    //   return this._userLikes?.indexOf(this.item.id) > -1;
-    // },
-    alreadyLiked() {
-      return Boolean(this.likedItem);
-    },
-    alreadyBookmarked() {
-      return Boolean(this.bookmarkedItem);
-    },
-    bookmarkedItem() {
-      return this._userBookmarks?.find(b => b.bookmarkId === this.item.id);
-    },
-    likedItem() {
-      return this._userLikes?.find(b => b.bookmarkId === this.item.id);
-    },
-    ...mapGetters(["_getCurrentUser", "_userLikes", "_userBookmarks"])
-  }
-};
+  })
+  const { likeItem, bookmarkItem, categoryName, userName, alreadyBookmarked, alreadyLiked, bookmarkedItem, likedItem, _getCurrentUser, _userBookmarks, _userLikes } = BookmarkListItem(props.item);
 </script>
+

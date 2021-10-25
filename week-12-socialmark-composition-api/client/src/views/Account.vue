@@ -9,23 +9,14 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import sideBar from "@/components/Account/sideBar";
+import {inject, ref} from "vue";
+const appAxios= inject("appAxios")
+const bookmarkList = ref([]);
 
-export default {
-  components: {
-    sideBar
-  },
-  data() {
-    return {
-      bookmarkList: []
-    };
-  },
-  created() {
-    this.$appAxios.get("/bookmarks?_expand=category&_expand=user").then(bookmark_list_response => {
+appAxios.get("/bookmarks?_expand=category&_expand=user").then(bookmark_list_response => {
       console.log("bookmark_list_response :>> ", bookmark_list_response);
-      this.bookmarkList = bookmark_list_response?.data || [];
+      bookmarkList.value = bookmark_list_response?.data || [];
     });
-  }
-};
 </script>

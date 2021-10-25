@@ -20,19 +20,12 @@
     </a>
   </aside>
 </template>
-<script>
-export default {
-  emits: ["category-changed"],
-  data() {
-    return {
-      categoryList: []
-    };
-  },
-  created() {
-    this.$appAxios.get("/categories").then(category_response => {
-      // console.log(category_response);
-      this.categoryList = category_response?.data || [];
-    });
-  }
-};
+<script setup>
+import {ref,inject,defineEmits} from "vue";
+defineEmits(["category-changed"]);
+const categoryList= ref([]);
+const appAxios= inject("appAxios");
+appAxios.get("/categories").then(category_response => {
+categoryList.value = category_response?.data || [];
+});
 </script>

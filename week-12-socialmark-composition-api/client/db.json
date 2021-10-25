@@ -28,6 +28,11 @@
       "userId": 1,
       "bookmarkId": 3,
       "id": 3
+    },
+    {
+      "userId": 1,
+      "bookmarkId": 9,
+      "id": 4
     }
   ],
   "user_bookmarks": [
@@ -40,6 +45,16 @@
       "userId": 1,
       "bookmarkId": 3,
       "id": 2
+    },
+    {
+      "userId": 1,
+      "bookmarkId": 10,
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "bookmarkId": 12,
+      "id": 4
     }
   ],
   "bookmarks": [
@@ -149,6 +164,15 @@
       "userId": 2,
       "created_at": "2021-09-22T21:44:57.874Z",
       "id": 11
+    },
+    {
+      "title": "Deneme",
+      "url": "www.deneme",
+      "categoryId": 5,
+      "description": "deneme",
+      "userId": 1,
+      "created_at": "2021-10-25T21:53:46.104Z",
+      "id": 12
     }
   ],
   "categories": [

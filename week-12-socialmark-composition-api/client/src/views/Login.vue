@@ -12,33 +12,35 @@
     </span>
   </div>
 </template>
-<script>
+<script setup>
+import{ref,inject} from 'vue';
 import CryptoJS from "crypto-js";
-export default {
-  data() {
-    return {
-      userData: {
-        username: null,
-        password: null
-      }
-    };
-  },
-  methods: {
-    onSubmit() {
-      const password = CryptoJS.HmacSHA1(this.userData.password, this.$store.getters._saltKey).toString();
-      this.$appAxios
-        .get(`/users?username=${this.userData.username}&password=${password}`)
+import {useStore} from "vuex";
+import {useRouter} from "vue-router"
+const appAxios = inject("appAxios");
+const store= useStore();
+const router=useRouter();
+const userData= ref({
+      username: null,
+      password: null
+})
+const onSubmit=()=> {
+      const password = CryptoJS.HmacSHA1(userData.value.password, store.getters._saltKey).toString();
+      appAxios
+        .get(`/users?username=${userData.value.username}&password=${password}`)
         .then(login_response => {
           if (login_response?.data?.length > 0) {
-            this.$store.commit("setUser", login_response?.data[0]);
-            this.$router.push({ name: "HomePage" });
+            store.commit("setUser", login_response?.data[0]);
+            router.push({ name: "HomePage" });
           } else {
             alert("Böyle bir kullanıcı bulunamadı...");
           }
         })
         .catch(e => console.log(e));
       // .finally(() => this.loader = false)
-    }
-  }
-};
+}
+</script>
+<script>
+
+
 </script>
